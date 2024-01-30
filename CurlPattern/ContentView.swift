@@ -6,19 +6,28 @@
 //
 
 import SwiftUI
-
+//@State var question = QuestionModel(question: "How often do you wash your hair", options: ["Once a week", "2-3 times a week", "twice a week"])
 struct QuestionView: View {
-    
-    @State var question = QuestionModel(question: "How often do you wash your hair", options: ["1 week", "1 day", "twice a week"])
-    
+    // pass in the index as a binding `@Binding` var index: Int
+    @StateObject var questionsViewModel = QuestionsViewModel()
+
     var body: some View {
-        Text(question.question)
-        ForEach(question.options, id: \.self) { option in
-            Button(option) {
-                question.select(option: option )
+        // unwrap the optional
+        if var selectedQuestion = questionsViewModel.selectedQuestion {
+            VStack{
+                Text(selectedQuestion.question)
+                ForEach(selectedQuestion.options, id: \.self) { option in
+                    Button(option) {
+                        questionsViewModel                        // assign the option to the `selectedOption` of our `selectedQuestion`
+                    // call the `update` function for our questionsViewModel and pass in this `selectedQuestion`
+                    }
+                }
+                Text(selectedQuestion.selectedOptions ?? "no option selected")
             }
+            // show something if `questionsViewModel.selectedQuestion` is nil
+        } else {
+            EmptyView()
         }
-        Text(question.selectedOptions ?? "no option selected")
     }
 }
 
@@ -32,17 +41,14 @@ struct QuestionModel {
     }
 }
 struct ContentView: View {
+    // store all the questions in your contentview
+    // track the current question. maybe track the current index.
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        QuestionView()
     }
 }
 
 #Preview {
-    QuestionView()
+    ContentView()
 }
