@@ -11,6 +11,7 @@
 		CA92348F2B62B8E80088C54C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA92348E2B62B8E80088C54C /* ContentView.swift */; };
 		CA9234912B62B8E90088C54C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA9234902B62B8E90088C54C /* Assets.xcassets */; };
 		CA9234942B62B8E90088C54C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA9234932B62B8E90088C54C /* Preview Assets.xcassets */; };
+		CAB1E4692B69566000AF796E /* QuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB1E4682B69566000AF796E /* QuestionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		CA92348E2B62B8E80088C54C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CA9234902B62B8E90088C54C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA9234932B62B8E90088C54C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CAB1E4682B69566000AF796E /* QuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				CA92348C2B62B8E80088C54C /* CurlPatternApp.swift */,
 				CA92348E2B62B8E80088C54C /* ContentView.swift */,
+				CAB1E4682B69566000AF796E /* QuestionsViewModel.swift */,
 				CA9234902B62B8E90088C54C /* Assets.xcassets */,
 				CA9234922B62B8E90088C54C /* Preview Content */,
 			);
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA92348F2B62B8E80088C54C /* ContentView.swift in Sources */,
+				CAB1E4692B69566000AF796E /* QuestionsViewModel.swift in Sources */,
 				CA92348D2B62B8E80088C54C /* CurlPatternApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
