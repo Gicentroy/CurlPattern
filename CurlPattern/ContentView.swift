@@ -4,7 +4,7 @@
 //
 //  Created by Gicentroy Henry III on 1/25/24.
 //
-
+//new stuff//
 import SwiftUI
 //@State var question = QuestionModel(question: "How often do you wash your hair", options: ["Once a week", "2-3 times a week", "twice a week"])
 struct QuestionView: View {
