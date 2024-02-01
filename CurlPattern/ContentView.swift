@@ -17,10 +17,16 @@ struct QuestionView: View {
             VStack{
                 Text(selectedQuestion.question)
                 ForEach(selectedQuestion.options, id: \.self) { option in
-                    Button(option) {
-                        questionsViewModel                        // assign the option to the `selectedOption` of our `selectedQuestion`
+//                    Button(option) {
+                    // assign the option to the `selectedOption` of our `selectedQuestion`
                     // call the `update` function for our questionsViewModel and pass in this `selectedQuestion`
+                    Button {
+                        questionsViewModel.update()
+                    } label: {
+                       Text(option)
                     }
+                    
+//                    }
                 }
                 Text(selectedQuestion.selectedOptions ?? "no option selected")
             }

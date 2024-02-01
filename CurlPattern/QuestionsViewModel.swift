@@ -26,8 +26,8 @@ class QuestionsViewModel: ObservableObject {
     
     /// updates the `questions` array with a question that has an updated `selectedAnswer`
     /// - Parameter question: the questionmodel with an updated answer
-    func update(_ answeredQuestion: QuestionModel) {
-        questions[index] = answeredQuestion
+    func update(     ) {
+//questions[index] = answeredQuestion
         index += 1
         selectedQuestion = questions[index]
     }
