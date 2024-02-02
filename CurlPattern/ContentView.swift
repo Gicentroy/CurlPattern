@@ -10,29 +10,37 @@ import SwiftUI
 struct QuestionView: View {
     // pass in the index as a binding `@Binding` var index: Int
     @StateObject var questionsViewModel = QuestionsViewModel()
-
+    @State private var isPresentingResultsView = false
+    @State var done = false
+    
     var body: some View {
         // unwrap the optional
-        if var selectedQuestion = questionsViewModel.selectedQuestion {
+        if let selectedQuestion = questionsViewModel.selectedQuestion {
             VStack{
-                Text(selectedQuestion.question)
-                ForEach(selectedQuestion.options, id: \.self) { option in
-//                    Button(option) {
-                    // assign the option to the `selectedOption` of our `selectedQuestion`
-                    // call the `update` function for our questionsViewModel and pass in this `selectedQuestion`
-                    Button {
-                        questionsViewModel.update()
-                    } label: {
-                       Text(option)
+                if done{
+                    ResultsView()
+                }else{
+                    Text(selectedQuestion.question)
+                    ForEach(selectedQuestion.options, id: \.self) { option in
+                        //                    Button(option) {
+                        // assign the option to the `selectedOption` of our `selectedQuestion`
+                        
+                        // call the `update` function for our questionsViewModel and pass in this `selectedQuestion`
+                        Button {
+                            if questionsViewModel.index < questionsViewModel.questions.count - 1{
+                                questionsViewModel.update()
+                            }else{
+                                done = true
+                            }
+                       
+                            
+                        } label: {
+                            Text(option)
+                        }
                     }
                     
-//                    }
                 }
-                Text(selectedQuestion.selectedOptions ?? "no option selected")
             }
-            // show something if `questionsViewModel.selectedQuestion` is nil
-        } else {
-            EmptyView()
         }
     }
 }
@@ -52,6 +60,13 @@ struct ContentView: View {
     
     var body: some View {
         QuestionView()
+    }
+}
+
+
+struct ResultsView: View {
+    var body: some View {
+        Text("Results")
     }
 }
 

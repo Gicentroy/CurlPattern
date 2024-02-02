@@ -30,9 +30,11 @@ class QuestionsViewModel: ObservableObject {
 //questions[index] = answeredQuestion
         index += 1
         selectedQuestion = questions[index]
+        //print("cur i: \(self.index) -- arr len: \(self.questions.count)")
     }
     init() {
         selectedQuestion = questions[0]
     }
+    
 }
 //
