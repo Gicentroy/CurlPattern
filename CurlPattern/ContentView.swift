@@ -16,7 +16,7 @@ struct QuestionView: View {
     var body: some View {
         ZStack{
             Image("Background")
-            VStack{
+            VStack{ //controls "Hair Type Survery!"
                 Text("Hair Type Survey!")
                     .font(.largeTitle)
                     .fontWeight(.black)
@@ -26,20 +26,23 @@ struct QuestionView: View {
                     .padding(.all)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/3/*@END_MENU_TOKEN@*/)
+                    .position(x:270, y:300)
         // unwrap the optional
                 if let selectedQuestion = questionsViewModel.selectedQuestion {
             VStack{
                 if done{
                     ResultsView()
                 }else{
-                    Spacer()
-                        .frame(width: 1.0, height: 260.469)
-                    Text(selectedQuestion.question)
+//                    Spacer()
+//                        .frame(width: 1.0, height: 260.469)
+                    Text(selectedQuestion.question) //Controls question
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .padding([.leading, .bottom, .trailing], 30.0)
+                        .padding([.leading, .bottom, .trailing], 30)
                         .font(.system(size: 19))
+                        .frame(maxWidth: 425)
+                    
                     ForEach(selectedQuestion.options, id: \.self) { option in
                         //                    Button(option) {
                         // assign the option to the `selectedOption` of our `selectedQuestion`
@@ -51,6 +54,7 @@ struct QuestionView: View {
                                 done = true
                             }
                         } label: {
+                            //Controls options under question
                             Text(option)
                                 .overlay(
                                         RoundedRectangle(cornerRadius: 10)
@@ -60,12 +64,15 @@ struct QuestionView: View {
                                 .padding(.all)
                                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
                                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/3/*@END_MENU_TOKEN@*/)
+                            
                     }
-                        Spacer()
-                            .frame(width: 1.0, height: 33.463)
+                        Spacer() //(Controls options under question)
+                            .frame(width: 1.0, height: 22)
+                        
                     }
                 }
             }
+            .position(x:268, y:150)
         }
                    }
     }
