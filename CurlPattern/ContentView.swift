@@ -16,6 +16,7 @@ struct QuestionView: View {
     var body: some View {
         ZStack{
             Image("Background")
+            //This whill shift all this shit around
             VStack{ //controls "Hair Type Survery!"
                 Text("Hair Type Survey!")
                     .font(.largeTitle)
@@ -26,8 +27,11 @@ struct QuestionView: View {
                     .padding(.all)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/3/*@END_MENU_TOKEN@*/)
-                    .position(x:270, y:300)
+                    Divider()
+                    //.position(x:270, y:250)
+                //This will shift all this shit around
         // unwrap the optional
+                
                 if let selectedQuestion = questionsViewModel.selectedQuestion {
             VStack{
                 if done{
@@ -56,25 +60,27 @@ struct QuestionView: View {
                         } label: {
                             //Controls options under question
                             Text(option)
-                                .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color("2F1000"), lineWidth: 0)
-                                            //.fill(/*@START_MENU_TOKEN@*/Color("2F1000")/*@END_MENU_TOKEN@*/
-                                            )
+//                                .overlay(
+//                                        RoundedRectangle(cornerRadius: 10)
+//                                            .stroke(Color("2F1000"), lineWidth: 0)
+//                                            //.fill(/*@START_MENU_TOKEN@*/Color("2F1000")/*@END_MENU_TOKEN@*/
+//                                            )
                                 .padding(.all)
                                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
-                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/3/*@END_MENU_TOKEN@*/)
+                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 2)
                             
                     }
-                        Spacer() //(Controls options under question)
-                            .frame(width: 1.0, height: 22)
+//                        Spacer() //(Controls options under question)
+//                            .frame(width: 1.0, height: 22)
                         
                     }
                 }
             }
-            .position(x:268, y:150)
+            
         }
                    }
+            //.position(x:200, y:100)
+            //This will shift all this shit around
     }
     }
 }
@@ -97,13 +103,30 @@ struct ContentView: View {
     }
 }
 
-
 struct ResultsView: View {
+    @State private var isSecondViewActive = false
     var body: some View {
-        Text("Results") .foregroundColor(.white)
+        NavigationStack{
+            ZStack{
+                VStack {
+                    // Button that navigates to a different view
+                    NavigationLink("Results", destination: ResultsPageView())
+                        //.ignoresSafeArea()
+                       // .frame(width:30 ,height: 35)
+                }
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
 }
+
+
+//NavigationLink(destination: ResultsPageView()
+//NavigationLink(isPresented: $isSecondViewActive) {
+//    ResultsPageView()
+
+//Button("Results") {
+//    isSecondViewActive = true
