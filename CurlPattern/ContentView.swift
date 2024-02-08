@@ -12,7 +12,6 @@ struct QuestionView: View {
     @StateObject var questionsViewModel = QuestionsViewModel()
     @State private var isPresentingResultsView = false
     @State var done = false
-    
     var body: some View {
         ZStack{
             Image("Background")
@@ -31,7 +30,6 @@ struct QuestionView: View {
                     //.position(x:270, y:250)
                 //This will shift all this shit around
         // unwrap the optional
-                
                 if let selectedQuestion = questionsViewModel.selectedQuestion {
             VStack{
                 if done{
@@ -46,7 +44,6 @@ struct QuestionView: View {
                         .padding([.leading, .bottom, .trailing], 30)
                         .font(.system(size: 19))
                         .frame(maxWidth: 425)
-                    
                     ForEach(selectedQuestion.options, id: \.self) { option in
                         //                    Button(option) {
                         // assign the option to the `selectedOption` of our `selectedQuestion`
@@ -60,14 +57,14 @@ struct QuestionView: View {
                         } label: {
                             //Controls options under question
                             Text(option)
-//                                .overlay(
-//                                        RoundedRectangle(cornerRadius: 10)
-//                                            .stroke(Color("2F1000"), lineWidth: 0)
-//                                            //.fill(/*@START_MENU_TOKEN@*/Color("2F1000")/*@END_MENU_TOKEN@*/
-//                                            )
+                                .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color("2F1000"), lineWidth: 2)
+                                            //.fill(/*@START_MENU_TOKEN@*/Color("2F1000")/*@END_MENU_TOKEN@*/
+                                            )
                                 .padding(.all)
                                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
-                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 2)
+                                //.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 2)
                             
                     }
 //                        Spacer() //(Controls options under question)
@@ -84,7 +81,6 @@ struct QuestionView: View {
     }
     }
 }
-
 struct QuestionModel {
     var question: String
     var options: [String]
@@ -102,31 +98,38 @@ struct ContentView: View {
         QuestionView()
     }
 }
-
 struct ResultsView: View {
     @State private var isSecondViewActive = false
     var body: some View {
-        NavigationStack{
-            ZStack{
-                VStack {
-                    // Button that navigates to a different view
-                    NavigationLink("Results", destination: ResultsPageView())
-                        //.ignoresSafeArea()
-                       // .frame(width:30 ,height: 35)
-                }
+        //NavigationStack{ ZStack{ Needed if using Tabs/Going to another view
+        VStack {
+            // Button that navigates to a different view
+            Button("Results") {
+                isSecondViewActive = true
+            }
+            .sheet(isPresented: $isSecondViewActive) {
+                ResultsPageView()
             }
         }
     }
+    struct SheetView: View {
+        @Binding var isSheetPresented: Bool
+        
+        var body: some View {
+            VStack {
+                Text("Sheet Content")
+                Button(action: {
+                    isSheetPresented.toggle()
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.red)
+                        .font(.title)
+                }
+            }
+            //.padding()
+        }
+    }
+    #Preview {
+        ContentView()
+    }
 }
-
-#Preview {
-    ContentView()
-}
-
-
-//NavigationLink(destination: ResultsPageView()
-//NavigationLink(isPresented: $isSecondViewActive) {
-//    ResultsPageView()
-
-//Button("Results") {
-//    isSecondViewActive = true
