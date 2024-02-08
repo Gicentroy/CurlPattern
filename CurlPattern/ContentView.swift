@@ -12,10 +12,10 @@ struct QuestionView: View {
     @StateObject var questionsViewModel = QuestionsViewModel()
     @State private var isPresentingResultsView = false
     @State var done = false
-    
     var body: some View {
         ZStack{
             Image("Background")
+            //This whill shift all this shit around
             VStack{ //controls "Hair Type Survery!"
                 Text("Hair Type Survey!")
                     .font(.largeTitle)
@@ -26,7 +26,9 @@ struct QuestionView: View {
                     .padding(.all)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/3/*@END_MENU_TOKEN@*/)
-                    .position(x:270, y:300)
+                    Divider()
+                    //.position(x:270, y:250)
+                //This will shift all this shit around
         // unwrap the optional
                 if let selectedQuestion = questionsViewModel.selectedQuestion {
             VStack{
@@ -42,7 +44,6 @@ struct QuestionView: View {
                         .padding([.leading, .bottom, .trailing], 30)
                         .font(.system(size: 19))
                         .frame(maxWidth: 425)
-                    
                     ForEach(selectedQuestion.options, id: \.self) { option in
                         //                    Button(option) {
                         // assign the option to the `selectedOption` of our `selectedQuestion`
@@ -58,27 +59,28 @@ struct QuestionView: View {
                             Text(option)
                                 .overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color("2F1000"), lineWidth: 0)
+                                            .stroke(Color("2F1000"), lineWidth: 2)
                                             //.fill(/*@START_MENU_TOKEN@*/Color("2F1000")/*@END_MENU_TOKEN@*/
                                             )
                                 .padding(.all)
                                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
-                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/3/*@END_MENU_TOKEN@*/)
+                                //.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 2)
                             
                     }
-                        Spacer() //(Controls options under question)
-                            .frame(width: 1.0, height: 22)
+//                        Spacer() //(Controls options under question)
+//                            .frame(width: 1.0, height: 22)
                         
                     }
                 }
             }
-            .position(x:268, y:150)
+            
         }
                    }
+            //.position(x:200, y:100)
+            //This will shift all this shit around
     }
     }
 }
-
 struct QuestionModel {
     var question: String
     var options: [String]
@@ -96,14 +98,38 @@ struct ContentView: View {
         QuestionView()
     }
 }
-
-
 struct ResultsView: View {
+    @State private var isSecondViewActive = false
     var body: some View {
-        Text("Results") .foregroundColor(.white)
+        //NavigationStack{ ZStack{ Needed if using Tabs/Going to another view
+        VStack {
+            // Button that navigates to a different view
+            Button("Results") {
+                isSecondViewActive = true
+            }
+            .sheet(isPresented: $isSecondViewActive) {
+                ResultsPageView()
+            }
+        }
     }
-}
-
-#Preview {
-    ContentView()
+    struct SheetView: View {
+        @Binding var isSheetPresented: Bool
+        
+        var body: some View {
+            VStack {
+                Text("Sheet Content")
+                Button(action: {
+                    isSheetPresented.toggle()
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.red)
+                        .font(.title)
+                }
+            }
+            //.padding()
+        }
+    }
+    #Preview {
+        ContentView()
+    }
 }
