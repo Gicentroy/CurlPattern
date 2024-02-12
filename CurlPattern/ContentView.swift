@@ -13,21 +13,23 @@ struct QuestionView: View {
     @State private var isPresentingResultsView = false
     @State var done = false
     var body: some View {
-        ZStack{
-            Image("Background")
-            //This whill shift all this shit around
+        ZStack{ //background
+            Color(._2_F_1000)
+                .ignoresSafeArea()
             VStack{ //controls "Hair Type Survery!"
-                Text("Hair Type Survey!")
-                    .font(.largeTitle)
-                    .fontWeight(.black)
-                //.lineLimit(1)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
-                    .padding(.all)
-                    .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/3/*@END_MENU_TOKEN@*/)
-                    Divider()
-                    //.position(x:270, y:250)
+                ZStack{
+                    RoundedRectangle(cornerRadius:20)
+                        .fill(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                        .stroke(Color.white, lineWidth:1)
+                        .frame(width: 386.015, height: 80)
+                        .position(x:180, y:100)
+                    Text("Hair Type Survey!")
+                        .position(x:180, y:100)
+                        .foregroundColor(.white)
+                        .font(.system(size: 50, weight: .thin, design: .default))
+                       // .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
+                }
+                .padding(.all)
                 //This will shift all this shit around
         // unwrap the optional
                 if let selectedQuestion = questionsViewModel.selectedQuestion {
@@ -35,8 +37,7 @@ struct QuestionView: View {
                 if done{
                     ResultsView()
                 }else{
-//                    Spacer()
-//                        .frame(width: 1.0, height: 260.469)
+
                     Text(selectedQuestion.question) //Controls question
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -56,16 +57,13 @@ struct QuestionView: View {
                             }
                         } label: {
                             //Controls options under question
-                            Text(option)
-                                .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color("2F1000"), lineWidth: 2)
-                                            //.fill(/*@START_MENU_TOKEN@*/Color("2F1000")/*@END_MENU_TOKEN@*/
-                                            )
-                                .padding(.all)
-                                .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("2F1000")/*@END_MENU_TOKEN@*/)
-                                //.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 2)
-                            
+                            ZStack{
+                                Text(option)
+                                        RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Color.white, lineWidth:1)
+                                            //.background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                                            .padding(.all, 5.0)
+                            }
                     }
 //                        Spacer() //(Controls options under question)
 //                            .frame(width: 1.0, height: 22)
@@ -103,13 +101,23 @@ struct ResultsView: View {
     var body: some View {
         //NavigationStack{ ZStack{ Needed if using Tabs/Going to another view
         VStack {
-            // Button that navigates to a different view
-            Button("Results") {
-                isSecondViewActive = true
-            }
-            .sheet(isPresented: $isSecondViewActive) {
-                ResultsPageView()
-            }
+            ZStack{
+                // Button that navigates to a different view
+                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                    .stroke(Color.white, lineWidth:4)
+                    .frame(width: 300.0, height: 80)
+                .position(x:190, y:100)}
+            //ZStack{
+                Button("Results")
+                    //.position(x:190, y:100)
+            //}
+                {
+                    isSecondViewActive = true
+                }
+                .sheet(isPresented: $isSecondViewActive) {
+                    ResultsPageView()
+              //  }
+        }
         }
     }
     struct SheetView: View {
@@ -129,7 +137,8 @@ struct ResultsView: View {
             //.padding()
         }
     }
+}
     #Preview {
         ContentView()
     }
-}
+
