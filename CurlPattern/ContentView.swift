@@ -104,7 +104,7 @@ struct ResultsView: View {
             ZStack{
                 // Button that navigates to a different view
                 RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .stroke(Color.white, lineWidth:4)
+                    .stroke(Color.white, lineWidth:0)
                     .frame(width: 300.0, height: 80)
                 .position(x:190, y:100)}
             //ZStack{
